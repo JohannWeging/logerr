@@ -31,6 +31,13 @@ func WithFields(err error, fields map[string]interface{}) error {
 	}
 }
 
+func DeferWithFields(err *error, fields map[string]interface{}) {
+	if *err == nil {
+		return
+	}
+	*err = WithFields(*err, fields)
+}
+
 // GetFields returns the log fields from the wrapped errors
 func GetFields(err error) map[string]interface{} {
 	fields := map[string]interface{}{}
